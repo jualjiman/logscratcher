@@ -1,15 +1,40 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+	<script>
+		function refrescar(pid){
+				$.ajax({
+				  type: "POST",
+				  url: "/refresh_log_data/" + pid + "/" ,
+				  data: {
+				  },
+				  success: function( data ) {
+				    $("#app" + pid + " .desc").text(data).hide().fadeIn();
+				  }
+				});
+			}
+	</script>
+	
 	<title>LogScratcher</title>
 </head>
 <body>
+	<div class="navbar navbar-default">
+	  <div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </button>
+	    <a class="navbar-brand" href="#">LogScratcher</a>
+	  </div>
+	</div>
 	<div class="container">
 		{% block mainContent %}{% endblock %}
 	</div>

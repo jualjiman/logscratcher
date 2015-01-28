@@ -7,5 +7,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'scratcher.views.pruebas', name='pruebas'),
+    url(r'^$', 'scratcher.views.home', name='home'),
+    url(r'^refresh_log_data/(\d+)/$', 'scratcher.views.refresh_log_data', name='refresh_log_data'),
 )

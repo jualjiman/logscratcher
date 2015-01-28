@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block mainContent %}
+	<!-- Indicates a dangerous or potentially negative action -->
+	<div class="row">
+		<table class="table table-striped">
+	    	<thead>
+	        	<tr>
+	          		<th>Project name</th>
+		          	<th>Server</th>
+		          	<th>Last update</th>
+		          	<th>Scratching in</th>
+		          	<th></th>
+	        	</tr>
+	      	</thead>
+	      	<tbody>
+
+			{%for project in projects%}
+
+				<tr id="app{{project.id}}">
+			        <td><strong>{{project.name}}</strong></td>
+			        <td>{{project.server.name}}</td>
+			        <td class="desc">{{ project.last_update|date:"N d, Y, h:i:s A" }}</td>
+			        <td>{{ project.path }}</td>
+			        <td>
+		          		<a href="#" id="btnComando"class="btn btn-success" onclick="refrescar({{ project.id }})" role="button">
+							<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+						</a>
+					</td>
+		        </tr>
+
+			{% endfor %}
+
+			</tbody>
+	    </table>
+
+{% endblock %}
