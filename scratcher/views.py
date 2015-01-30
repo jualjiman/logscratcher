@@ -9,18 +9,18 @@ from datetime import datetime
 
 # Create your views here.
 
-def execute_fabric_command(command,timeout=30):
+def execute_command(command,timeout=330):
 	fabric_command = str(command)
 	r = envoy.run(fabric_command, timeout=timeout)
-	return r.std_out
+	return r
 
 def update_project(pid):
 	project = Project.objects.get(id=pid)
+	#server = execute_command("fab define_server:'%s','%s'" % (project.server.name, project.server.data))
+	#command = "fab -H %s -u %s -p %s scratch_logs:path='%s'" % (project.server.host, project.server.user, project.server.password, project.path,)
+	command = "bash run.sh %s %s '%s'" % (project.server.user, project.server.host, project.path,)
 
-	#server = execute_fabric_command("fab define_server:'%s','%s'" % (project.server.name, project.server.data))
-	command = "fab -H %s -u %s -p %s scratch_logs:path='%s'" % (project.server.host, project.server.user, project.server.password, project.path,)
-	out = execute_fabric_command(command)
-	print out
+	out = execute_command(command).std_out
 	start = "*#Terminado"
 	end = "#*"
 	last_update = out[out.find(start)+len(start):out.rfind(end)].strip()
@@ -38,6 +38,7 @@ def getting_log_data(pid):
 @csrf_exempt
 def refresh_log_data(request, pid):
 	return HttpResponse(getting_log_data(pid))
+
 
 def home(request):
 	projects = list(Project.objects.all())
