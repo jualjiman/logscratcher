@@ -11,6 +11,7 @@ from datetime import datetime
 
 def execute_command(command,timeout=330):
 	fabric_command = str(command)
+	print command
 	r = envoy.run(fabric_command, timeout=timeout)
 	return r
 
@@ -41,7 +42,7 @@ def refresh_log_data(request, pid):
 
 
 def home(request):
-	projects = list(Project.objects.all())
+	projects = list(Project.objects.filter(active=True))
 
 	for indx, project in enumerate(projects):
 		projects[indx] = update_project(project.id)
