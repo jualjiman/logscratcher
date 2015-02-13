@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
-import envoy
+import envoy, re
 from datetime import datetime
 
 # Create your views here.
@@ -28,7 +28,13 @@ def update_project(pid):
 
 	# *#Terminado 2015-08-16 11:42:00#*
 	if not last_update == '':
-		last_datetime = datetime.strptime(last_update, '%Y-%m-%d %H:%M:%S')
+		#last_datetime = datetime.strptime(last_update, '%Y-%m-%d %H:%M:%S')
+
+		#2015-08-16 11:42:00
+		p = re.compile('[:\s-]')
+		datep = map(int, p.split(last_update))
+		
+		last_datetime = datetime(datep[0],datep[1],datep[2],datep[3],datep[4],datep[5])
 		project.last_update = last_datetime
 		project.status = "Done"
 	else:
