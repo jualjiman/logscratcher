@@ -32,7 +32,7 @@ def update_project(pid):
 		project.last_update = last_datetime
 		project.status = "Done"
 	else:
-		project.status = "Conection refused"
+		project.status = "Error"
 
 	project.save()
 
