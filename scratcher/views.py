@@ -27,14 +27,20 @@ def update_project(pid):
 	last_update = out[out.find(start)+len(start):out.rfind(end)].strip()
 
 	# *#Terminado 2015-08-16 11:42:00#*
-	last_datetime = datetime.strptime(last_update, '%Y-%m-%d %H:%M:%S')
-	project.last_update = last_datetime
+	if not last_update == '':
+		last_datetime = datetime.strptime(last_update, '%Y-%m-%d %H:%M:%S')
+		project.last_update = last_datetime
+		project.status = "Done"
+	else:
+		project.status = "Conection refused"
+
 	project.save()
 
 	return project
 
 def getting_log_data(pid):
-	return update_project(pid).last_update.strftime('%b. %d, %Y, %I:%M:%S %p')
+	project = update_project(pid)
+	return project.last_update.strftime('%b. %d, %Y, %I:%M:%S %p') + "-" + project.status
 
 @csrf_exempt
 def refresh_log_data(request, pid):

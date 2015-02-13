@@ -8,8 +8,9 @@
 	        	<tr>
 	          		<th>Project name</th>
 		          	<th>Server</th>
-		          	<th>Last update</th>
 		          	<th>Scratching in</th>
+		          	<th>Last update</th>
+		          	<th>Last status</th>
 		          	<th></th>
 	        	</tr>
 	      	</thead>
@@ -20,8 +21,9 @@
 				<tr id="app{{project.id}}">
 			        <td><strong>{{project.name}}</strong></td>
 			        <td>{{project.server.name}}</td>
-			        <td class="desc">{{ project.last_update|date:"N d, Y, h:i:s A" }}</td>
 			        <td>{{ project.path }}</td>
+			        <td class="desc">{{ project.last_update|date:"N d, Y, h:i:s A" }}</td>
+			        <td class="stat">{{ project.status }}</td>
 			        <td>
 		          		<a href="#" id="btnComando"class="btn btn-success" onclick="refrescar({{ project.id }})" role="button">
 							<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>

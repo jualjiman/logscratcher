@@ -16,7 +16,10 @@
 				  data: {
 				  },
 				  success: function( data ) {
-				    $("#app" + pid + " .desc").text(data).hide().fadeIn();
+				    var data = data.split("-");
+				    $("#app" + pid + " .desc").text(data[0]).hide().fadeIn();
+				    $("#app" + pid + " .stat").text(data[1]).hide().fadeIn();
+
 				  }
 				});
 			}
