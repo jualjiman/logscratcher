@@ -8,6 +8,7 @@
 	        	<tr>
 	          		<th>Project name</th>
 		          	<th>Server</th>
+		          	<th>Where is</th>
 		          	<th>Scratching in</th>
 		          	<th>Last update</th>
 		          	<th>Last status</th>
@@ -21,6 +22,7 @@
 				<tr id="app{{project.id}}">
 			        <td><strong>{{project.name}}</strong></td>
 			        <td>{{project.server.name}}</td>
+			        <td>{{project.whereIs.name}}</td>
 			        <td>{{ project.path }}</td>
 			        <td class="desc">{{ project.last_update|date:"N d, Y, h:i:s A" }}</td>
 			        <td class="stat">{{ project.status }}</td>

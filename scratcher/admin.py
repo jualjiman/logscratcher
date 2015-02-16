@@ -8,4 +8,5 @@ class ServertAdmin(admin.ModelAdmin):
 	list_display = ('name','user','host','description',)
 
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(WhereIs)
 admin.site.register(Server, ServertAdmin)
