@@ -54,7 +54,7 @@ def refresh_log_data(request, pid):
 
 
 def home(request):
-	projects = list(Project.objects.filter(active=True))
+	projects = list(Project.objects.filter(active=True).order_by("whereIs"))
 
 	for indx, project in enumerate(projects):
 		projects[indx] = update_project(project.id)
